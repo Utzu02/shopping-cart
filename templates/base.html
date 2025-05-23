@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>{% block title %}Shopping Cart{% endblock %}</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+  <script src="//unpkg.com/alpinejs" defer></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'ui-sans-serif', 'system-ui'] },
+          boxShadow: {
+            'nav': '0 2px 10px -3px rgba(0, 0, 0, 0.3)',
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="min-h-screen flex flex-col bg-gray-50">
+  <nav x-data="{open:false}" class="bg-white border-b-2 border-gray-100 shadow-nav px-4 sm:px-6 py-4 flex items-center justify-between
+         sticky top-0 z-50 transition-all duration-300">
+
+    <!-- logo -->
+    <a href="/" class="text-2xl font-bold text-gray-800 hover:text-gray-700">
+      UPBshop<span class="text-blue-500 text-lg">.</span>
+    </a>
+
+    <!-- hamburger (mobile) -->
+    <button @click="open=!open"
+      class="md:hidden text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg"
+      aria-label="Toggle navigation">
+      <!-- icon -->
+      <svg x-show="!open" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+        class="w-7 h-7">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+      <svg x-show="open" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+        class="w-7 h-7">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+
+    <!-- links -->
+    <div :class="open ? 'block' : 'hidden'"
+      class="w-full md:flex md:items-center md:w-auto transition-all origin-top md:block">
+      <div class="pt-4 md:pt-0 md:flex md:space-x-4 text-sm">
+
+        <a href="/"
+          class="block px-4 py-2 text-gray-600 {{ 'font-semibold text-blue-500' if active_page=='home' else 'hover:text-gray-800' }}">
+          Home
+        </a>
+
+        <a href="{{ url_for('view_cart') }}"
+          class="flex items-center px-4 py-2 text-gray-600 {{ 'font-semibold text-blue-500' if active_page=='cart' else 'hover:text-gray-800' }}">
+          Cart
+          <span class="ml-2 bg-blue-500 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs">
+            <span id="cart-count">{{ cart_count }}</span>
+          </span>
+        </a>
+
+        <a href="{{ url_for('checkout') }}"
+          class="block px-4 py-2 text-gray-600 {{ 'font-semibold text-blue-500' if active_page=='checkout' else 'hover:text-gray-800' }}">
+          Checkout
+        </a>
+
+        <a href="{{ url_for('admin_products') }}"
+          class="block px-4 py-2 text-gray-600 {{ 'font-semibold text-blue-500' if active_page=='admin_products' else 'hover:text-gray-800' }}">
+          SQLProducts
+        </a>
+
+        <a href="{{ url_for('admin_orders') }}"
+          class="block px-4 py-2 text-gray-600 {{ 'font-semibold text-blue-500' if active_page=='admin_orders' else 'hover:text-gray-800' }}">
+          SQLOrders
+        </a>
+
+        <a href="{{ url_for('contact') }}"
+          class="block px-4 py-2 text-gray-600 {{ 'font-semibold text-blue-500' if active_page=='contact' else 'hover:text-gray-800' }}">
+          Contact
+        </a>
+      </div>
+    </div>
+  </nav>
+
+
+  <main class="flex-grow container mx-auto px-4 py-8">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="bg-white border-t-2 border-gray-100 mt-12">
+    <div class="container mx-auto px-6 py-8">
+      <div class="text-center">
+        <p class="text-gray-500 text-sm">
+          <strong>Tudorescu Ioan Daniel</strong><br>
+          <span class="text-xs text-gray-400">312CC, anul I</span>
+        </p>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

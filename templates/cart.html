@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}MyShop – Home{% endblock %}
+
+{% block content %}
+<h1 class="text-3xl font-extrabold mb-10 text-center lg:text-left">Shopping Cart</h1>
+
+{% if cart_items %}
+<div class="mx-auto max-w-4xl rounded-2xl bg-white shadow ring-1 ring-gray-200 p-6">
+
+    <div class="overflow-x-auto">
+        <table class="min-w-full text-sm">
+            <thead>
+                <tr class="bg-gray-50 text-gray-700">
+                    <th class="px-4 py-3 text-left font-semibold">Product</th>
+                    <th class="px-4 py-3 text-right font-semibold">Price</th>
+                    <th class="px-4 py-3 text-center font-semibold">Qty</th>
+                    <th class="px-4 py-3 text-right font-semibold">Subtotal</th>
+                    <th class="px-4 py-3 text-center font-semibold">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cart_items %}
+                <tr class="border-b last:border-0">
+                    <td class="px-4 py-3">{{ item.name }}</td>
+                    <td class="px-4 py-3 text-right">${{ '%.2f'|format(item.price) }}</td>
+                    <td class="px-4 py-3 text-center">
+                        <div class="inline-flex items-center gap-2">
+                            <a href="{{ url_for('update_qty', id=item.id, action='dec') }}"
+                                class="px-2 py-0.5 rounded-full ring-1 ring-gray-300 hover:bg-gray-100">−</a>
+
+                            <span class="min-w-[2ch] inline-block">{{ item.quantity }}</span>
+
+                            <a href="{{ url_for('update_qty', id=item.id, action='inc') }}"
+                                class="px-2 py-0.5 rounded-full ring-1 ring-gray-300 hover:bg-gray-100">+</a>
+                        </div>
+                    </td>
+                    <td class="px-4 py-3 text-right">${{ '%.2f'|format(item.subtotal) }}</td>
+                    <td class="px-4 py-3 text-center">
+                        <a href="{{ url_for('remove_from_cart', id=item.id) }}"
+                            class="text-red-600 hover:underline">Remove</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="mt-6 flex flex-col items-end gap-4">
+        <p class="text-xl font-bold">
+            Total:&nbsp;
+            <span class="text-indigo-600">${{ '%.2f'|format(total_price) }}</span>
+        </p>
+        <a href="{{ url_for('checkout') }}" class="inline-flex items-center justify-center rounded-full bg-green-600
+                px-8 py-3 font-semibold text-white shadow hover:bg-green-700
+                transition">
+            Proceed to Checkout
+        </a>
+    </div>
+
+</div>
+{% else %}
+<p class="text-center text-gray-600">Your cart is empty.</p>
+{% endif %}
+{% endblock %}

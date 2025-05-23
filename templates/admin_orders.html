@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}Admin · Orders{% endblock %}
+
+{% block content %}
+<h1 class="text-3xl font-extrabold mb-10 text-center lg:text-left">Admin · Orders</h1>
+
+{% if orders %}
+  <div class="space-y-10">
+    {% for o in orders %}
+      <div class="rounded-2xl bg-white shadow ring-1 ring-gray-200 p-6">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+          <div class="mb-4 sm:mb-0">
+            <p class="font-semibold">Order #{{ o.id }}</p>
+            <p class="text-xs text-gray-500">{{ o.created_at.strftime("%Y-%m-%d %H:%M:%S") }}</p>
+          </div>
+          <p class="text-lg font-bold text-indigo-600">$ {{ '%.2f'|format(o.total_price) }}</p>
+        </div>
+
+        <div class="mt-4 grid gap-2 text-sm text-gray-700">
+          <p><span class="font-medium">Name:</span> {{ o.full_name }}</p>
+          <p><span class="font-medium">Email:</span> {{ o.email }}</p>
+          {% if o.phone %}<p><span class="font-medium">Phone:</span> {{ o.phone }}</p>{% endif %}
+          <p><span class="font-medium">Address:</span> {{ o.address }}</p>
+          <p><span class="font-medium">Payment:</span> {{ o.payment_method }}</p>
+        </div>
+
+        <div class="mt-6 overflow-x-auto">
+          <table class="min-w-full text-sm">
+            <thead>
+              <tr class="bg-gray-50 text-gray-700">
+                <th class="px-4 py-2 text-left font-semibold">Product ID</th>
+                <th class="px-4 py-2 text-left font-semibold">Name</th>
+                <th class="px-4 py-2 text-center font-semibold">Qty</th>
+                <th class="px-4 py-2 text-right font-semibold">Price ($)</th>
+                <th class="px-4 py-2 text-right font-semibold">Subtotal</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for it in o.items %}
+                <tr class="border-b last:border-0">
+                  <td class="px-4 py-2">{{ it.product_id }}</td>
+                  <td class="px-4 py-2">{{ it.product.name if it.product else '—' }}</td>
+                  <td class="px-4 py-2 text-center">{{ it.quantity }}</td>
+                  <td class="px-4 py-2 text-right">{{ '%.2f'|format(it.price) }}</td>
+                  <td class="px-4 py-2 text-right">
+                    {{ '%.2f'|format(it.price * it.quantity) }}
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% else %}
+  <p class="text-center text-gray-600">Nu există comenzi.</p>
+{% endif %}
+{% endblock %}

@@ -39,7 +39,7 @@ Am folosit Tailwind deoarece am mai lucrat cu el si mi se pare mult mai maleabil
     In pagina de contact am adaugat si un form pe care daca il completezi se vor afisa toate detaliile lui in consola.  
     M am gandit sa fac si un sistem de login si register, dar nu mi se parea atat de folositor intrucat era doar de forma si scria in tema ca nu e obligatoriu sa fi logat.
 
-Site-ul este `responsive`, iar pentru header la burger am folosit alpine.js, un fel de jquery
+Site-ul este `responsive`, iar pentru header la burger am folosit alpine.js, un fel de jquery.
 Toata logica de a adauga un item in cos, de a modifica cantitatea itemelor in pagina de cos, de a filtra dupa categorii si de a cauta produsele este facuta in backend in `server.py` si de asta se da refresh automat cand fac una din actiunile astea. M-am gandit sa folosesc un middleware de js pentru actiunile astea sa nu se mai dea refresh, dar am zis ca nu respect unele lucruri din cerinta.
 
 In `dockerfile` am setat ca `VOLUME` folderul `/database` si ar trebui sa ramana consistent db-ul

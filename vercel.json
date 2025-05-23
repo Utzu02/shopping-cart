@@ -1,11 +1,13 @@
 {
   "functions": {
-    "server.py": {
+    "api/index.py": {
       "runtime": "python3.11"
     }
   },
   "routes": [
-    // trimite TOT (cu excepția celor din /public) spre funcția Flask
-    { "src": "/(.*)", "dest": "server.py" }
+    {
+      "src": "/(.*)",
+      "dest": "api/index.py"
+    }
   ]
 }

@@ -1,0 +1,11 @@
+{
+  "functions": {
+    "server.py": {
+      "runtime": "python3.11"
+    }
+  },
+  "routes": [
+    // trimite TOT (cu excepția celor din /public) spre funcția Flask
+    { "src": "/(.*)", "dest": "server.py" }
+  ]
+}

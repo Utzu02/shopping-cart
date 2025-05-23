@@ -1,0 +1,39 @@
+{
+    "full_name": "Ioan Daniel Tudorescu",
+    "email": "danuttud@gmail.com",
+    "phone": "0774484493",
+    "address": "Bulevardu Republicii nr. 26, bloc 26, scara 3, etaj 7, apartament 91",
+    "payment_method": "card",
+    "items": [
+        {
+            "id": 1,
+            "name": "Product 1",
+            "price": 10.0,
+            "quantity": 3,
+            "subtotal": 30.0
+        },
+        {
+            "id": 2,
+            "name": "Product 2",
+            "price": 15.5,
+            "quantity": 12,
+            "subtotal": 186.0
+        },
+        {
+            "id": 3,
+            "name": "Product 3",
+            "price": 7.25,
+            "quantity": 5,
+            "subtotal": 36.25
+        },
+        {
+            "id": 4,
+            "name": "Product 4",
+            "price": 12.99,
+            "quantity": 1,
+            "subtotal": 12.99
+        }
+    ],
+    "total_price": 265.24,
+    "datetime": "2025-05-21 22:19:53"
+}

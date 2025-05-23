@@ -1,11 +1,9 @@
 {
-  "version": 2,               // <- face Vercel să folosească noul parser
+  "version": 2,
   "builds": [
     {
-      "src": "api/index.py",  // fișierul handler (mutat în folderul api)
-      "use": "@vercel/python" // builderul oficial; aduce runtime-ul implicit
-      // opțional:
-      // "config": { "runtime": "python3.11", "maxLambdaSize": "15mb" }
+      "src": "api/index.py",
+      "use": "@vercel/python"
     }
   ],
   "routes": [

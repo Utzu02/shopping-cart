@@ -13,8 +13,11 @@ os.makedirs(UPLOAD_DIR, exist_ok=True)
 def allowed(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXT
 
-
-app = Flask(__name__)
+app = Flask(
+    __name__,
+    template_folder="templates",
+    static_folder="static"  # (opțional) – dacă vrei să servești din Flask
+)
 app.secret_key = "supersecretkey"
 app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{DB_PATH}"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
@@ -265,6 +268,5 @@ def admin_orders():
                     .all())
     return render_template("admin_orders.html", orders=orders, active_page=None)
 
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
-
+def handler(environ, start_response):
+    return app(environ, start_response)

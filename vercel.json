@@ -1,13 +1,14 @@
 {
-  "functions": {
-    "api/index.py": {
-      "runtime": "python3.11"
-    }
-  },
-  "routes": [
+  "version": 2,               // <- face Vercel să folosească noul parser
+  "builds": [
     {
-      "src": "/(.*)",
-      "dest": "api/index.py"
+      "src": "api/index.py",  // fișierul handler (mutat în folderul api)
+      "use": "@vercel/python" // builderul oficial; aduce runtime-ul implicit
+      // opțional:
+      // "config": { "runtime": "python3.11", "maxLambdaSize": "15mb" }
     }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "api/index.py" }
   ]
 }

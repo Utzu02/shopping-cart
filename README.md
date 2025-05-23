@@ -45,3 +45,9 @@ Toata logica de a adauga un item in cos, de a modifica cantitatea itemelor in pa
 In `dockerfile` am setat ca `VOLUME` folderul `/database` si ar trebui sa ramana consistent db-ul
 
 Am pus `dockerignore` deoarece dau `COPY . .` si sa nu mi se copieze folderul de `DB` ca dupa sa mi dea `eroare` cand ii pun `VOLUME`
+
+Pentru deschiderea site-ului rulati
+
+`docker build -t iap1-tema ./`
+
+`docker run -p 5000:5000 -it iap1-tema`
